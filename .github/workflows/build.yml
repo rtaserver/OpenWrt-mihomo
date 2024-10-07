@@ -63,7 +63,7 @@ jobs:
                "i386_pentium4"
                "x86_64"
              )
-             echo "arch=$(echo ${allarch[@]} | jq -R . | jq -s .)" >> $GITHUB_OUTPUT
+             echo "arch=$(printf '%s\n' "${allarch[@]}" | jq -R . | jq -s .)" >> $GITHUB_OUTPUT
           else
              echo "arch=[\"${{ inputs.arch }}\"]" >> $GITHUB_OUTPUT
           fi
