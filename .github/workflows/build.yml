@@ -39,31 +39,33 @@ jobs:
       - name: Set Matrix Run
         id: set-matrix
         run: |
+          sudo apt-get -qq update
+          sudo apt-get -qq install jq
           if [ "${{ inputs.arch }}" == "all" ]; then
              allarch=(
-             "arm_cortex-a5_vfpv4"
-             "arm_cortex-a7_neon-vfpv4"
-             "arm_cortex-a8_vfpv3"
-             "arm_cortex-a9"
-             "arm_cortex-a9_vfpv3-d16"
-             "arm_cortex-a9_neon"
-             "arm_cortex-a15_neon-vfpv4"
-             "aarch64_cortex-a53"
-             "aarch64_cortex-a72"
-             "aarch64_generic"
-             "mips_24kc"
-             "mips_4kec"
-             "mips_mips32"
-             "mipsel_24kc"
-             "mipsel_24kc_24kf"
-             "mipsel_74kc"
-             "mips64_octeonplus"
-             "i386_pentium4"
-             "x86_64"
+               "arm_cortex-a5_vfpv4"
+               "arm_cortex-a7_neon-vfpv4"
+               "arm_cortex-a8_vfpv3"
+               "arm_cortex-a9"
+               "arm_cortex-a9_vfpv3-d16"
+               "arm_cortex-a9_neon"
+               "arm_cortex-a15_neon-vfpv4"
+               "aarch64_cortex-a53"
+               "aarch64_cortex-a72"
+               "aarch64_generic"
+               "mips_24kc"
+               "mips_4kec"
+               "mips_mips32"
+               "mipsel_24kc"
+               "mipsel_24kc_24kf"
+               "mipsel_74kc"
+               "mips64_octeonplus"
+               "i386_pentium4"
+               "x86_64"
              )
-             echo "arch=$(printf '%s\n' "${allarch[@]}" | jq -R . | jq -s .)" >> $GITHUB_OUTPUT
+             echo "arch=$(echo ${allarch[@]} | jq -R . | jq -s .)" >> $GITHUB_OUTPUT
           else
-             echo "arch='[\"${{ inputs.arch }}\"]'" >> $GITHUB_OUTPUT
+             echo "arch=[\"${{ inputs.arch }}\"]" >> $GITHUB_OUTPUT
           fi
 
   build:
