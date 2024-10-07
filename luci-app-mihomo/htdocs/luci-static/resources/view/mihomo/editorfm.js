@@ -10,7 +10,7 @@ return view.extend({
                 // If the directory exists, return the URL for tinyfilemanager
                 return '/tinyfilemanager/index.php?p=etc%2Fmihomo%2Frun';
             } else {
-                throw new Error('Directory not found');
+                throw new Error('Directory TinyFile Manager not found');
             }
         }).catch(function () {
             // If tinyfilemanager is not found, check for tinyfm
@@ -18,7 +18,7 @@ return view.extend({
                 if (stat.type === 'directory') {
                     return '/tinyfm/tinyfm.php?p=etc%2Fmihomo%2Frun';
                 } else {
-                    throw new Error('Directory not found');
+                    throw new Error('Directory TinyFile Manager not found');
                 }
             }).catch(function () {
                 // If neither directory is found, fallback to a not found page

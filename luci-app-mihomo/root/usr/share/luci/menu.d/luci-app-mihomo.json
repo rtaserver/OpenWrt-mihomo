@@ -26,17 +26,9 @@
             "path": "mihomo/editor"
         }
     },
-    "admin/services/mihomo/editortinyfm": {
-        "title": "Editor TinyFM",
-        "order": 30,
-        "action": {
-            "type": "view",
-            "path": "mihomo/editortinyfm"
-        }
-    },
     "admin/services/mihomo/log": {
         "title": "Log",
-        "order": 40,
+        "order": 30,
         "action": {
             "type": "view",
             "path": "mihomo/log"
