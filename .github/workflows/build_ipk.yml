@@ -44,7 +44,7 @@ jobs:
           echo "src-git packages https://github.com/openwrt/packages.git;openwrt-${{ env.sdk_ver }}" >> feeds.conf
           echo "src-git luci https://github.com/openwrt/luci.git;openwrt-${{ env.sdk_ver }}" >> feeds.conf
           echo "src-git routing https://git.openwrt.org/feed/routing.git;openwrt-${{ env.sdk_ver }}"  >> feeds.conf
-          echo "src-git mihomo https://github.com/rtaserver/OpenWrt-mihomo-Mod.git;dev" >> feeds.conf
+          echo "src-git mihomo https://github.com/rtaserver/OpenWrt-mihomo-Mod.git;mod" >> feeds.conf
           ./scripts/feeds update -a
           echo "CONFIG_PACKAGE_luci-app-mihomo=m" > .config
           ./scripts/feeds install -d n luci-app-mihomo
