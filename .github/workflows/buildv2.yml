@@ -14,8 +14,6 @@ env:
 jobs:
   job_build_mihomo:
     name: Build mihomo [Luci ${{ matrix.luci_ver }}]
-    needs: job_check
-    if: needs.job_check.outputs.has_update == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
