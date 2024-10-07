@@ -39,10 +39,10 @@ jobs:
       - name: Set Matrix Run
         id: set-matrix
         run: |
-          if [ "${{ inputs.target }}" == "all" ]; then
-             echo "target=['arm_cortex-a5_vfpv4','arm_cortex-a7_neon-vfpv4','arm_cortex-a8_vfpv3','arm_cortex-a9','arm_cortex-a9_vfpv3-d16','arm_cortex-a9_neon','arm_cortex-a15_neon-vfpv4','aarch64_cortex-a53','aarch64_cortex-a72','aarch64_generic','mips_24kc','mips_4kec','mips_mips32','mipsel_24kc','mipsel_24kc_24kf','mipsel_74kc','mips64_octeonplus','i386_pentium4','x86_64']" >> $GITHUB_OUTPUT
+          if [ "${{ inputs.arch }}" == "all" ]; then
+             echo "arch=['arm_cortex-a5_vfpv4','arm_cortex-a7_neon-vfpv4','arm_cortex-a8_vfpv3','arm_cortex-a9','arm_cortex-a9_vfpv3-d16','arm_cortex-a9_neon','arm_cortex-a15_neon-vfpv4','aarch64_cortex-a53','aarch64_cortex-a72','aarch64_generic','mips_24kc','mips_4kec','mips_mips32','mipsel_24kc','mipsel_24kc_24kf','mipsel_74kc','mips64_octeonplus','i386_pentium4','x86_64']" >> $GITHUB_OUTPUT
           else
-             echo "target=['${{ inputs.target }}']" >> $GITHUB_OUTPUT
+             echo "arch=['${{ inputs.arch }}']" >> $GITHUB_OUTPUT
           fi
 
   build:
