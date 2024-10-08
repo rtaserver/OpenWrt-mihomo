@@ -42,7 +42,7 @@ return view.extend({
 
         let m, s, o, so;
 
-        m = new form.Map('mihomo', _('<p><strong><span style="color: rgb(250, 197, 28);">Mihomo TProxy</span> <span style="color: rgb(184, 49, 47);">RTA</span>-<span style="color: rgb(41, 105, 176);">WRT</span></strong></p>'), `${_('Transparent Proxy with Mihomo on OpenWrt.')} <a href="https://github.com/morytyann/OpenWrt-mihomo/wiki" target="_blank">${_('How To Use')}</a>`);
+        m = new form.Map('mihomo', _('<p><strong><span style="color: rgb(41, 105, 176);">✦ Mihomo</span> <span style="color: rgb(250, 197, 28);">TProxy ✦</span></strong></p>'), `${_('Transparent Proxy with Mihomo on OpenWrt.')} <a href="https://github.com/morytyann/OpenWrt-mihomo/wiki" target="_blank">${_('How To Use')}</a>`);
 
         s = m.section(form.NamedSection, 'status', 'status', _('<p><strong>📣 Status</strong></p>'));
 

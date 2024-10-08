@@ -9,14 +9,14 @@ return view.extend({
     load: function () {
         return fs.stat('/www/tinyfilemanager').then(function (stat) {
             if (stat.type === 'directory') {
-                return '/tinyfilemanager/index.php?p=etc%2Fmihomo%2Frun';
+                return '/tinyfilemanager/index.php?p=etc%2Fmihomo';
             } else {
                 throw new Error('Directory TinyFile Manager not found');
             }
         }).catch(function () {
             return fs.stat('/www/tinyfm').then(function (stat) {
                 if (stat.type === 'directory') {
-                    return '/tinyfm/tinyfm.php?p=etc%2Fmihomo%2Frun';
+                    return '/tinyfm/tinyfm.php?p=etc%2Fmihomo';
                 } else {
                     throw new Error('Directory TinyFile Manager not found');
                 }
