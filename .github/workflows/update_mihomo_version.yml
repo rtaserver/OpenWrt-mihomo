@@ -59,7 +59,7 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: rtaserver/OpenWrt-mihomo
+          repository: rtaserver/OpenWrt-mihomo-Mod
           ref: main
           path: OpenWrt-mihomo-Mod
       - id: update
