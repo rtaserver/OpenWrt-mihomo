@@ -17,9 +17,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: morytyann/OpenWrt-mihomo
-          ref: main
-          path: OpenWrt-mihomo
+          repository: rtaserver/OpenWrt-mihomo-Mod
+          ref: mod
+          path: OpenWrt-mihomo-Mod
       - id: get_current_info
         name: Get Current Info
         run: |
@@ -59,9 +59,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: morytyann/OpenWrt-mihomo
+          repository: rtaserver/OpenWrt-mihomo
           ref: main
-          path: OpenWrt-mihomo
+          path: OpenWrt-mihomo-Mod
       - id: update
         name: Update
         run: |
@@ -74,7 +74,7 @@ jobs:
         name: Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          path: OpenWrt-mihomo
+          path: OpenWrt-mihomo-Mod
           branch: dependabot
           commit-message: Update Mihomo Version
           title: Update Mihomo Version
