@@ -61,15 +61,15 @@ jobs:
           commit-message: Update Luci Mihomo Version
           title: Update Luci Mihomo Version
           body: |
-            From: `${{ needs.get_current_info.outputs.current_pkg_version }}`
-            To: `alpha-${{ needs.get_lastest_info.outputs.latest_pkg_version }}`
+            From: `v${{ needs.get_current_info.outputs.current_pkg_version }}`
+            To: `v${{ needs.get_lastest_info.outputs.latest_pkg_version }}`
 
       - name: Notify Telegram
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-          CURRENT: ${{ needs.get_current_info.outputs.current_pkg_version }}
-          LATEST: ${{ needs.get_lastest_info.outputs.latest_pkg_version }}
+          CURRENT: v${{ needs.get_current_info.outputs.current_pkg_version }}
+          LATEST: v${{ needs.get_lastest_info.outputs.latest_pkg_version }}
         run: |
           MESSAGE=$(cat <<-EOF
           ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
