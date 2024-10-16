@@ -1,0 +1,65 @@
+name: Update Luci Mihomo Version
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  get_current_info:
+    runs-on: ubuntu-latest
+    outputs:
+      current_pkg_version: ${{ steps.get_current_info.outputs.current_pkg_version }}
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: rtaserver/OpenWrt-mihomo-Mod
+          ref: mod
+          path: OpenWrt-mihomo-Mod
+      - id: get_current_info
+        name: Get Current Info
+        run: |
+          echo "current_pkg_version=$(grep "PKG_VERSION:=" OpenWrt-mihomo-Mod/luci-app-mihomo/Makefile | cut -d '=' -f 2)" >> $GITHUB_OUTPUT
+  get_lastest_info:
+    runs-on: ubuntu-latest
+    outputs:
+      latest_pkg_version: ${{ steps.get_lastest_info.outputs.latest_pkg_version }}
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: 'morytyann/OpenWrt-mihomo'
+          ref: 'main'
+          path: 'OpenWrt-mihomo'
+      - id: get_lastest_info
+        name: Get Latest Info
+        run: |
+          echo "latest_pkg_version=$(grep "PKG_VERSION:=" OpenWrt-mihomo/luci-app-mihomo/Makefile | cut -d '=' -f 2)" >> $GITHUB_OUTPUT
+  update:
+    needs:
+      - get_current_info
+      - get_lastest_info
+    if: ${{ needs.get_current_info.outputs.current_pkg_version != needs.get_lastest_info.outputs.latest_pkg_version }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: rtaserver/OpenWrt-mihomo-Mod
+          ref: main
+          path: OpenWrt-mihomo-Mod
+      - id: pr
+        name: Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          path: OpenWrt-mihomo-Mod
+          branch: dependabot
+          commit-message: Update Luci Mihomo Version
+          title: Update Luci Mihomo Version
+          body: |
+            From: `${{ needs.get_current_info.outputs.current_pkg_version }}`
+            To: `alpha-${{ needs.get_lastest_info.outputs.latest_pkg_version }}`
