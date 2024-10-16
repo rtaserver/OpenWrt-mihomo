@@ -24,13 +24,13 @@ Transparent Proxy with Mihomo on OpenWrt.
 ### B. Install From Release
 
 ```shell
-curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/main/install.sh | ash
+curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/mod/install.sh | ash
 ```
 
 ## Uninstall & Reset
 
 ```shell
-curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/main/uninstall.sh | ash
+curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/mod/uninstall.sh | ash
 ```
 
 ## How To Use
