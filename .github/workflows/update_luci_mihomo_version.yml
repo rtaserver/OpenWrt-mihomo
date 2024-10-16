@@ -52,6 +52,22 @@ jobs:
           repository: rtaserver/OpenWrt-mihomo-Mod
           ref: main
           path: OpenWrt-mihomo-Mod
+
+      - name: Set up git
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+  
+      - name: Add original repository as upstream
+        run: git remote add upstream https://github.com/morytyann/OpenWrt-mihomo.git
+  
+      - name: Fetch and merge original main
+        run: |
+          git fetch upstream
+          git checkout main
+          git merge upstream/main
+          git push origin main
+          
       - id: pr
         name: Pull Request
         uses: peter-evans/create-pull-request@v6
