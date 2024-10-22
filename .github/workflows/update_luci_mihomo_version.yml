@@ -53,11 +53,24 @@ jobs:
           ref: main
           path: OpenWrt-mihomo-Mod
 
-      - id: update
-        name: Update Upstream
+      - name: Set up git
         run: |
-          rm -rf OpenWrt-mihomo-Mod
-          git clone https://github.com/morytyann/OpenWrt-mihomo.git OpenWrt-mihomo-Mod
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+  
+      - name: Add original repository as upstream
+        run: |
+          cd OpenWrt-mihomo-Mod
+          git remote add upstream https://github.com/morytyann/OpenWrt-mihomo.git
+  
+      - name: Fetch and merge original main
+        run: |
+          git fetch upstream
+          git checkout main
+          git merge upstream/main
+          git remote -v
+          git add *
+          git push origin main
           
       - id: pr
         name: Pull Request
