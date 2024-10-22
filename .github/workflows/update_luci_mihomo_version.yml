@@ -49,9 +49,15 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: morytyann/OpenWrt-mihomo
+          repository: rtaserver/OpenWrt-mihomo-Mod
           ref: main
           path: OpenWrt-mihomo-Mod
+
+      - id: update
+        name: Update Upstream
+        run: |
+          rm -rf OpenWrt-mihomo-Mod
+          git clone https://github.com/morytyann/OpenWrt-mihomo.git OpenWrt-mihomo-Mod
           
       - id: pr
         name: Pull Request
