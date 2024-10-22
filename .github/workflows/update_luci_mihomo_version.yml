@@ -71,7 +71,6 @@ jobs:
           git merge upstream/main --allow-unrelated-histories
           git remote -v
           git add *
-          git push origin main
           
       - id: pr
         name: Pull Request
