@@ -58,10 +58,6 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
   
-      - name: Add original repository as upstream
-        run: |
-          cd OpenWrt-mihomo-Mod
-          git remote add upstream https://github.com/morytyann/OpenWrt-mihomo.git
   
       - name: Fetch and merge original main
         run: |
