@@ -59,10 +59,13 @@ jobs:
           git config --global user.email 'github-actions@github.com'
   
       - name: Add original repository as upstream
-        run: git remote add upstream https://github.com/morytyann/OpenWrt-mihomo.git
+        run: |
+          cd OpenWrt-mihomo-Mod
+          git remote add upstream https://github.com/morytyann/OpenWrt-mihomo.git
   
       - name: Fetch and merge original main
         run: |
+          cd OpenWrt-mihomo-Mod
           git fetch upstream
           git checkout main
           git merge upstream/main
