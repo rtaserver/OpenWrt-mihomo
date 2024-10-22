@@ -67,10 +67,7 @@ jobs:
         run: |
           cd OpenWrt-mihomo-Mod
           git fetch upstream
-          git checkout main
-          git remote -v
-          git add *
-          git merge upstream/main --allow-unrelated-histories
+          git merge upstream/main
           
       - id: pr
         name: Pull Request
