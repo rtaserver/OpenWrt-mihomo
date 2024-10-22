@@ -68,7 +68,7 @@ jobs:
           cd OpenWrt-mihomo-Mod
           git fetch upstream
           git checkout main
-          git merge upstream/main
+          git merge upstream/main --allow-unrelated-histories
           git remote -v
           git add *
           git push origin main
