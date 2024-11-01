@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mihomo
-PKG_RELEASE:=1
+PKG_RELEASE:=3
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/MetaCubeX/mihomo.git
@@ -54,7 +54,6 @@ define Package/mihomo/install
 	$(INSTALL_DIR) $(1)/etc/mihomo/nftables
 	$(INSTALL_DIR) $(1)/etc/mihomo/profiles
 	$(INSTALL_DIR) $(1)/etc/mihomo/run
-	$(INSTALL_DIR) $(1)/etc/mihomo/run/rules
 	$(INSTALL_DIR) $(1)/etc/mihomo/run/ui
 
 	$(INSTALL_DATA) $(CURDIR)/files/mixin.yaml $(1)/etc/mihomo/mixin.yaml

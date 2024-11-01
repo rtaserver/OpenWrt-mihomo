@@ -4,17 +4,18 @@
 
 Transparent Proxy with Mihomo on OpenWrt.
 
-> [!WARNING]
->
-> - **This Is A Modified Version Of Morytyann Official Version**
->   
-> - Only support firewall4, it means your OpenWrt version needs to be 22.03 or above
+
+## Prerequisites
+
+**This Is A Modified Version Of Morytyann Official Version**
+- OpenWrt >= 22.03
+- Linux Kernel >= 5.10
+- firewall4
 
 ## Feature
 
 - Transparent Proxy (TPROXY/TUN, IPv4 and/or IPv6)
 - Access Control
-- Compatible with Multiple WAN
 - Profile Mixin
 - Profile Editor
 - Scheduled Restart
@@ -42,8 +43,8 @@ See [Wiki](https://github.com/morytyann/OpenWrt-mihomo/wiki)
 1. Mixin and Update profile.
 2. Run mihomo.
 3. Run hijack prepare script.
-4. Add router hijack.
-5. Add lan hijack with access control.
+4. Set router hijack.
+5. Set lan hijack with access control.
 6. Set scheduled restart.
 
 Note that the steps above may change base on config.
@@ -54,6 +55,7 @@ Note that the steps above may change base on config.
 - curl
 - yq
 - firewall4
-- kmod-nft-tproxy
 - ip-full
+- kmod-inet-diag
+- kmod-nft-tproxy
 - kmod-tun
