@@ -8,7 +8,7 @@ Transparent Proxy with Mihomo on OpenWrt.
 ## Prerequisites
 
 **This Is A Modified Version Of Morytyann Official Version**
-- OpenWrt >= 22.03
+- OpenWrt >= 23.05
 - Linux Kernel >= 5.10
 - firewall4
 
