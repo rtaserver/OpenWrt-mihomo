@@ -30,8 +30,7 @@ else
 	exit 1
 fi
 tarball="mihomo_$arch-$branch.tar.gz"
-curl -s -L -o "$tarball" "https://mirror.ghproxy.com/https://github.com/morytyann/OpenWrt-mihomo/releases/latest/download/$tarball"
-
+curl -s -L -o "$tarball" "https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/releases/latest/download/$tarball"
 # extract tarball
 echo "extract tarball"
 tar -x -z -f "$tarball"
@@ -41,7 +40,6 @@ rm -f "$tarball"
 echo "install ipks"
 opkg install mihomo_*.ipk
 opkg install luci-app-mihomo_*.ipk
-opkg install luci-i18n-mihomo-zh-cn_*.ipk
 rm -f -- *mihomo*.ipk
 
 echo "success"

@@ -1,11 +1,13 @@
-![GitHub License](https://img.shields.io/github/license/morytyann/OpenWrt-mihomo?style=for-the-badge&logo=github) ![GitHub Tag](https://img.shields.io/github/v/release/morytyann/OpenWrt-mihomo?style=for-the-badge&logo=github) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/morytyann/OpenWrt-mihomo/total?style=for-the-badge&logo=github) ![GitHub Repo stars](https://img.shields.io/github/stars/morytyann/OpenWrt-mihomo?style=for-the-badge&logo=github) [![Telegram](https://img.shields.io/badge/Contact-Telegram-26A5E4?style=for-the-badge&logo=telegram)](https://t.me/mihomotproxy)
+![GitHub License](https://img.shields.io/github/license/morytyann/OpenWrt-mihomo?style=for-the-badge&logo=github) ![GitHub Tag](https://img.shields.io/github/v/release/morytyann/OpenWrt-mihomo?style=for-the-badge&logo=github) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/rtaserver/OpenWrt-mihomo-Mod/total?style=for-the-badge&logo=github) ![GitHub Repo stars](https://img.shields.io/github/stars/rtaserver/OpenWrt-mihomo-Mod?style=for-the-badge&logo=github) [![Telegram](https://img.shields.io/badge/Contact-Telegram-26A5E4?style=for-the-badge&logo=telegram)](https://t.me/mihomotproxy)
 
-# MihomoTProxy
+# MihomoTProxy By [morytyann](https://github.com/morytyann/OpenWrt-mihomo) 
 
 Transparent Proxy with Mihomo on OpenWrt.
 
+
 ## Prerequisites
 
+**This Is A Modified Version Of Morytyann Official Version**
 - OpenWrt >= 23.05
 - Linux Kernel >= 5.10
 - firewall4
@@ -20,34 +22,16 @@ Transparent Proxy with Mihomo on OpenWrt.
 
 ## Install & Update
 
-### A. Install From Feed (Recommended)
-
-1. Add Feed
-
-```shell
-# only needs to be run once
-curl -s -L https://mirror.ghproxy.com/https://github.com/morytyann/OpenWrt-mihomo/raw/refs/heads/main/feed.sh | ash
-```
-
-2. Install
-
-```shell
-# you can install from shell or `Software` menu in LuCI
-opkg install mihomo
-opkg install luci-app-mihomo
-opkg install luci-i18n-mihomo-zh-cn
-```
-
 ### B. Install From Release
 
 ```shell
-curl -s -L https://mirror.ghproxy.com/https://github.com/morytyann/OpenWrt-mihomo/raw/refs/heads/main/install.sh | ash
+curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/mod/install.sh | ash
 ```
 
 ## Uninstall & Reset
 
 ```shell
-curl -s -L https://mirror.ghproxy.com/https://github.com/morytyann/OpenWrt-mihomo/raw/refs/heads/main/uninstall.sh | ash
+curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/mod/uninstall.sh | ash
 ```
 
 ## How To Use
@@ -64,20 +48,6 @@ See [Wiki](https://github.com/morytyann/OpenWrt-mihomo/wiki)
 6. Set scheduled restart.
 
 Note that the steps above may change base on config.
-
-## Compilation
-
-```shell
-# add feed
-echo "src-git mihomo https://github.com/morytyann/OpenWrt-mihomo.git;main" >> "feeds.conf.default"
-# update & install feeds
-./scripts/feeds update -a
-./scripts/feeds install -a
-# make package
-make package/luci-app-mihomo/compile
-```
-
-The ipk file will be found under `bin/packages/your_architecture/mihomo`.
 
 ## Dependencies
 
