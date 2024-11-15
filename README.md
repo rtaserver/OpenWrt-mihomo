@@ -22,7 +22,7 @@ Transparent Proxy with Mihomo on OpenWrt.
 
 ## Install & Update
 
-### B. Install From Release
+### Install From Release
 
 ```shell
 curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/mod/install.sh | ash
