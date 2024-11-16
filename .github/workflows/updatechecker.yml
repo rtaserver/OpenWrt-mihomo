@@ -52,7 +52,7 @@ jobs:
         git checkout $REPO_BRANCH
         git reset --hard upstream/$REPO_BRANCH
         git commit -m "Exclude workflow file from sync" || echo "No changes to commit"
-        git push origin $REPO_BRANCH --force
+        git push origin $REPO_BRANCH --force || echo "No changes to commit"
 
     - name: Create Pull Request To Branch Mod
       if: steps.cacheHash.outputs.cache-hit != 'true'
