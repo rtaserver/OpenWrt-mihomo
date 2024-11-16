@@ -25,6 +25,20 @@ Transparent Proxy with Mihomo on OpenWrt.
 ### Install From Release
 
 ```shell
+# you can install from shell or `Software` menu in LuCI
+# for opkg
+opkg install mihomo
+opkg install luci-app-mihomo
+opkg install luci-i18n-mihomo-zh-cn
+# for apk
+apk add --allow-untrusted mihomo
+apk add --allow-untrusted luci-app-mihomo
+apk add --allow-untrusted luci-i18n-mihomo-zh-cn
+```
+
+### B. Install From Release
+
+```shell
 curl -s -L https://mirror.ghproxy.com/https://github.com/rtaserver/OpenWrt-mihomo-Mod/raw/refs/heads/mod/install.sh | ash
 ```
 
