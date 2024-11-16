@@ -1,8 +1,8 @@
 name: Update Checker
 
 on:
-  #schedule:
-  #  - cron: '0 * * * *'
+  schedule:
+    - cron: '0 17 * * *' # Menjalankan setiap hari pada pukul 17:00 UTC (12:00 WIB)
   workflow_dispatch:
 
 jobs:
@@ -46,3 +46,18 @@ jobs:
           body: 'This PR syncs the fork with the upstream repository.'
           base: mod
           head: main
+
+      - name: Notify Telegram
+        if: steps.check_updates.outputs.changed == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          REPO_URL="https://github.com/rtaserver/OpenWrt-mihomo-Mod"
+          DATE=$(date +"%Y-%m-%d %H:%M:%S")
+          MESSAGE="*PULL REQUEST* Mihomo Update\n-> REPO: [KLIK DISINI]($REPO_URL)\n-> DATE: $DATE"
+          BUTTON='{"inline_keyboard":[[{"text":"KLIK DISINI","url":"'$REPO_URL'"}]]}'
+          
+          curl -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+          -H "Content-Type: application/json" \
+          -d '{"chat_id":"'$TELEGRAM_CHAT_ID'","text":"'"$MESSAGE"'","parse_mode":"Markdown","reply_markup":'"$BUTTON"'}'
