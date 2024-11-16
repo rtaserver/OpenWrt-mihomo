@@ -28,7 +28,7 @@ jobs:
       - name: Check for updates
         id: check_updates
         run: |
-          git checkout main
+          git checkout -B main upstream/main
           git merge upstream/main --no-edit || echo "No changes to merge"
           git status
 
