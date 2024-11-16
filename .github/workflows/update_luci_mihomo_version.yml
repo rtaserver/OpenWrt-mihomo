@@ -1,0 +1,109 @@
+name: Update Luci Mihomo Version
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  get_current_info:
+    runs-on: ubuntu-latest
+    outputs:
+      current_pkg_version: ${{ steps.get_current_info.outputs.current_pkg_version }}
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: rtaserver/OpenWrt-mihomo-Mod
+          ref: mod
+          path: OpenWrt-mihomo-Mod
+      - id: get_current_info
+        name: Get Current Info
+        run: |
+          echo "current_pkg_version=$(grep "PKG_VERSION:=" OpenWrt-mihomo-Mod/luci-app-mihomo/Makefile | cut -d '=' -f 2)" >> $GITHUB_OUTPUT
+  get_lastest_info:
+    runs-on: ubuntu-latest
+    outputs:
+      latest_pkg_version: ${{ steps.get_lastest_info.outputs.latest_pkg_version }}
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: 'morytyann/OpenWrt-mihomo'
+          ref: 'main'
+          path: 'OpenWrt-mihomo'
+      - id: get_lastest_info
+        name: Get Latest Info
+        run: |
+          echo "latest_pkg_version=$(grep "PKG_VERSION:=" OpenWrt-mihomo/luci-app-mihomo/Makefile | cut -d '=' -f 2)" >> $GITHUB_OUTPUT
+  update:
+    needs:
+      - get_current_info
+      - get_lastest_info
+    if: ${{ needs.get_current_info.outputs.current_pkg_version != needs.get_lastest_info.outputs.latest_pkg_version }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: rtaserver/OpenWrt-mihomo-Mod
+          ref: main
+          path: OpenWrt-mihomo-Mod
+
+      - name: Set up git
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+  
+      - name: Update
+        run: |
+          cd OpenWrt-mihomo-Mod
+          git remote add upstream https://github.com/morytyann/OpenWrt-mihomo.git
+          git remote -v
+          git fetch upstream
+          git checkout main
+          git merge upstream/main
+          # wget https://github.com/morytyann/OpenWrt-mihomo/archive/refs/heads/main.zip
+          # unzip main.zip
+          # cp -rf OpenWrt-mihomo-main/* ./
+          # rm -rf OpenWrt-mihomo-main
+
+          
+      - id: pr
+        name: Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          path: OpenWrt-mihomo-Mod
+          branch: dependabot
+          commit-message: Update Luci Mihomo Version
+          title: Update Luci Mihomo Version
+          body: |
+            From: `v${{ needs.get_current_info.outputs.current_pkg_version }}`
+            To: `v${{ needs.get_lastest_info.outputs.latest_pkg_version }}`
+
+      - name: Notify Telegram
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          CURRENT: v${{ needs.get_current_info.outputs.current_pkg_version }}
+          LATEST: v${{ needs.get_lastest_info.outputs.latest_pkg_version }}
+        run: |
+          MESSAGE=$(cat <<-EOF
+          ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+                           NEW UPDATE
+          ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+          NAME  : \`OpenWrt-Mihomo-Mod\`
+          CURRENT VERSION  : \`${CURRENT}\`
+          LATEST VERSION  : \`${LATEST}\`
+          REPO  : \`rtaserver/OpenWrt-mihomo-Mod\`
+          PR  : [Click Here](https://github.com/rtaserver/OpenWrt-mihomo-Mod/pulls)
+          ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+          EOF
+          )
+          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage" \
+          -d chat_id=$CHAT_ID \
+          -d parse_mode=Markdown \
+          -d text="$MESSAGE"
