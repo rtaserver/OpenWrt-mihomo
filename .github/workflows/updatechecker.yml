@@ -27,18 +27,17 @@ jobs:
       - name: Add upstream remote
         run: |
           git remote add upstream https://github.com/morytyann/OpenWrt-mihomo.git
-          git fetch upstream
+          git fetch upstream main
 
       - name: Check for updates
         id: check_updates
         run: |
           git checkout -B main upstream/main
-          git merge upstream/main --no-edit || echo "No changes to merge"
-          git status
+          git merge upstream/main || echo "No changes to merge"
 
       - name: Push changes
         run: |
-          git push origin main
+          git push origin main || echo "No changes to merge"
         continue-on-error: true
 
       - name: Create Pull Request
