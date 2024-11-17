@@ -5,6 +5,10 @@ on:
     - cron: '0 17 * * *' # Menjalankan setiap hari pada pukul 17:00 UTC (12:00 WIB)
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
