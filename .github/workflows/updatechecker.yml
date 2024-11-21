@@ -32,8 +32,8 @@ jobs:
       - name: Check for updates
         id: check_updates
         run: |
-          git merge upstream/main || echo "needs_update=false" >> $GITHUB_OUTPUT
-          echo "needs_update=true" >> $GITHUB_OUTPUT
+          git merge upstream/main || echo "needs_update=true" >> $GITHUB_OUTPUT
+          echo "needs_update=false" >> $GITHUB_OUTPUT
 
       - name: Push changes
         if: steps.check_updates.outputs.needs_update == 'true'
@@ -42,9 +42,13 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check_updates.outputs.needs_update == 'true'
-        run: |
-          gh repo set-default rtaserver/OpenWrt-mihomo-Mod
-          gh pr create --base mod --head main --title "[PR] Origin To Mod" --body "Marge From Latest"
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'Sync from upstream'
+          body: 'This PR syncs the fork with the upstream repository.'
+          base: main
+          head: main
 
       - name: Notify Telegram
         if: steps.check_updates.outputs.needs_update == 'true'
