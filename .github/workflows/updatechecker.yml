@@ -15,9 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 
+        uses: actions/checkout@v4
 
       - name: Set up Git
         run: |
@@ -32,8 +30,11 @@ jobs:
       - name: Check for updates
         id: check_updates
         run: |
-          git merge upstream/main || echo "needs_update=true" >> $GITHUB_OUTPUT
-          echo "needs_update=false" >> $GITHUB_OUTPUT
+          if git merge upstream/main; then
+            echo "needs_update=true" >> $GITHUB_OUTPUT
+          else
+            echo "needs_update=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Push changes
         if: steps.check_updates.outputs.needs_update == 'true'
@@ -47,7 +48,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 'Sync from upstream'
           body: 'This PR syncs the fork with the upstream repository.'
-          base: main
+          base: mod
           head: main
 
       - name: Notify Telegram
